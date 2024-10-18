@@ -1,0 +1,119 @@
+# Room 1
+temperatures = [23.5 , 25.0 , 22.0 , 26.5 , 24.5]
+average_temp = sum(temperatures)/len(temperatures)
+print ( f" The average temperature is : {average_temp}")
+
+# Room 2
+import time 
+
+pressure = int ( input (" Enter pressure : ") )
+
+while True:
+    
+    if pressure <= 20:
+        print("low pressure, increasing pressure")
+        time.sleep(0.25)
+        print(f"current pressure: {pressure}")
+        pressure+=1
+    elif pressure > 20 and pressure < 80:
+        print("ideal pressure, maintaining pressure")
+        time.sleep(0.25)
+        print(f"current pressure: {pressure}")
+    else:
+        print("high pressure, , decreasing pressure")
+        time.sleep(0.25)
+        print(f"current pressure: {pressure}")
+        pressure-=1
+        
+# Room 3
+data = [2.3 , 3.1 , 4.5 , 5.6 , 7.2]
+size_60 = int (0.6 * len(data))
+data_60 = data [:size_60]
+data_40 = data [size_60:]
+print ( f" Data_60 : { data_60 }")
+print ( f" Data_40 : { data_40 }")
+
+
+
+# Room 4
+def classify_failure ( temp , pressure ) :
+    # Failure happens if temp > 75 or pressure > 120
+    if temp > 75 or temp > 125:
+        return "fail"
+    else:
+        return "success"
+
+# Test with a new machine reading
+temperature = int(input("Enter temperature value: "))
+pressure = int(input("Enter pressure value: "))
+result = classify_failure(temperature, pressure)
+print ( f" The machine ’ s status is : { result }")
+
+
+# Room 5 
+data = [3.1 , 2.9 , 5.4 , 6.2 , 1.9 , 5.7]
+threshold = 3.5
+cluster_1 = [x for x in data if x <= threshold]
+cluster_2 = [x for x in data if x > threshold]
+print ( f" Cluster 1: { cluster_1 }")
+print ( f" Cluster 2: { cluster_2 }")
+
+
+# Room 6
+def classify_student ( homework_score , exam_score ) :
+    if (homework_score+exam_score)/2>90:
+        return "High Achiever"
+    elif (homework_score+exam_score)/2>60:
+        return "Pass"
+    else:
+        return "Fail"
+    
+# Test cases
+print ( classify_student (90 , 92) ) # Output : High Achiever
+print ( classify_student (65 , 70) ) # Output : Pass
+print ( classify_student (55 , 58) ) # Output : Fail
+
+
+# Room 7
+data = {'homework_score': [40, 60, 80], 'exam_score': [70, 85, 90]}
+
+performance_index = [hw * exam for hw, exam in zip(data['homework_score'], data['exam_score'])]
+
+print(f"Performance Index (Homework * Exam): {performance_index}")
+
+
+# Room 8
+def predict_usage ( usage_values ) :
+    diff = usage_values [ -1] - usage_values [0]
+    slope = diff / ( len ( usage_values ) - 1)
+    return usage_values [ -1] + slope
+# Historical data : hrs of usage in the past 4 weeks
+usage_values = [50 , 60 , 70 , 80]
+next_week_usage = predict_usage(usage_values)
+print ( f" Predicted ChatGPT usage for next week : {next_week_usage}")
+
+
+# Room 9
+def transform(data):
+    min_val = min(data)
+    max_val = max(data)
+    normalized_data = [(x - min_val) / (max_val - min_val) for x in data]
+    return normalized_data
+
+# Sensor data with varying ranges
+sensor_data = [500, 1200, 3000, 8000]
+normalized_data = transform(sensor_data)
+print(f"Normalized Data: {normalized_data}")
+
+
+# Room 10
+import numpy as np
+
+data = np.array([[2, 4], [4, 6], [5, 9], [7, 10]])
+labels = ['Normal', 'Warning', 'Maintenance Needed', 'Fault']
+new_machine = np.array([5, 8])
+distances = np.linalg.norm(data - new_machine, axis=1)
+# Find the index of the nearest neighbor (smallest distance)
+nearest_index = np.argmin(distances)
+classification = labels[nearest_index]
+print(f"The new machine is classified as: {classification}")
